@@ -1,0 +1,628 @@
+:root {
+  --bg-0: #0b1020;
+  --bg-1: #121a35;
+  --card-front: linear-gradient(145deg, #1c2545, #2a3666);
+  --card-back: linear-gradient(145deg, #16203f, #1f2c57);
+  --accent: #5e7bff;
+  --accent-2: #7cf0c4;
+  --text: #eaf0ff;
+  --muted: #9aa7d0;
+  --line: rgba(255, 255, 255, 0.08);
+  --good: #38e08a;
+  --warn: #ffcc4d;
+  --down: #ff6b6b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #1d2a5a 0%, transparent 60%),
+    radial-gradient(1000px 500px at 110% 10%, #14324a 0%, transparent 55%),
+    linear-gradient(160deg, var(--bg-0), var(--bg-1));
+  background-attachment: fixed;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 28px 40px 8px;
+}
+
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand .logo {
+  font-size: 30px;
+  color: var(--accent-2);
+  filter: drop-shadow(0 0 10px rgba(124, 240, 196, 0.5));
+}
+.brand-text { display: flex; flex-direction: column; gap: 1px; }
+.brand h1 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.05;
+  letter-spacing: 0.5px;
+  font-weight: 650;
+}
+.brand .byline {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.brand .byline-name { color: var(--accent-2); font-weight: 600; }
+.top-actions { display: flex; align-items: center; gap: 16px; }
+.account {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--muted);
+}
+.account input {
+  appearance: none;
+  width: 130px;
+  background: var(--bg-1);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 7px 12px;
+  font-size: 13px;
+  text-transform: none; letter-spacing: normal;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+.account input:focus { outline: none; border-color: var(--accent); }
+.hint { color: var(--muted); font-size: 13px; margin: 0; }
+.alerts-toggle {
+  appearance: none;
+  background: rgba(94, 123, 255, 0.15);
+  color: var(--text);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.alerts-toggle:hover { background: rgba(94, 123, 255, 0.3); }
+.alerts-toggle.muted {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--line);
+  color: var(--muted);
+}
+
+/* SSH target-OS switch reuses the alerts-toggle pill but in a neutral palette
+   (it's a mode selector, not an on/off alarm). */
+.ssh-os-toggle {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--line);
+  color: var(--muted);
+}
+.ssh-os-toggle:hover { background: rgba(94, 123, 255, 0.18); color: var(--text); }
+.ssh-os-toggle svg { display: block; }
+
+.help { position: relative; display: flex; align-items: center; }
+.help-btn {
+  appearance: none;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 15px; font-weight: 700;
+  cursor: pointer;
+  display: grid; place-items: center;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.help-btn:hover {
+  color: var(--text);
+  border-color: var(--accent);
+  background: rgba(94, 123, 255, 0.15);
+}
+.help-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #0e1530;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  z-index: 20;
+  white-space: nowrap;
+}
+.help-popover ul { margin: 0; padding-left: 18px; }
+.help-popover li { color: var(--muted); font-size: 13px; line-height: 1.8; }
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding: 14px 40px 0;
+}
+.filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.filters select {
+  appearance: none;
+  background: var(--bg-1);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 9px 30px 9px 12px;
+  font-size: 14px;
+  min-width: 160px;
+  cursor: pointer;
+  /* little chevron */
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+                    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: calc(100% - 16px) 17px, calc(100% - 11px) 17px;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+.filters select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+/* Round icon button matching the header "?" help button. */
+.f-reset {
+  align-self: flex-end;
+  appearance: none;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 19px;
+  line-height: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.f-reset:hover {
+  color: var(--text);
+  border-color: var(--accent);
+  background: rgba(94, 123, 255, 0.15);
+}
+.f-hide-ip svg { display: block; }
+.f-hide-ip.active {
+  color: var(--accent-2);
+  border-color: var(--accent-2);
+  background: rgba(124, 240, 196, 0.12);
+}
+
+/* Free-text search box — matches the filter selects. */
+.f-search input {
+  appearance: none;
+  background: var(--bg-1);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 14px;
+  min-width: 220px;
+  text-transform: none; letter-spacing: normal;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+.f-search input:focus { outline: none; border-color: var(--accent); }
+
+/* Multi-select toggle-chip facets (Type / Status / Site) in a dropdown popover,
+   so the bar stays compact no matter how many sites there are. */
+.facet { position: relative; display: flex; flex-direction: column; gap: 6px; }
+.facet-label {
+  font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--muted);
+}
+/* Closed trigger button — matches the Sort <select>. */
+.facet-btn {
+  appearance: none; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: space-between; gap: 10px;
+  min-width: 150px;
+  background: var(--bg-1); color: var(--text);
+  border: 1px solid var(--line); border-radius: 10px;
+  padding: 9px 12px; font-size: 14px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.facet-btn:hover, .facet-btn[aria-expanded="true"] { border-color: var(--accent); }
+.facet-btn.filtered { border-color: var(--accent-2); color: var(--accent-2); }
+.facet-btn .caret { color: var(--muted); font-size: 10px; transition: transform 0.15s ease; }
+.facet-btn[aria-expanded="true"] .caret { transform: rotate(180deg); }
+/* Open popover panel — matches the settings/help popovers. */
+.facet-pop {
+  position: absolute; top: calc(100% + 6px); left: 0; z-index: 30;
+  min-width: 200px; max-width: 340px;
+  background: #0e1530;
+  border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  padding: 12px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.facet-pop .chips {
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+  max-height: 260px; overflow-y: auto;
+}
+.chip {
+  appearance: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(94, 123, 255, 0.18);
+  color: var(--text);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 13px;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+.chip:hover { border-color: var(--accent); background: rgba(94, 123, 255, 0.28); }
+.chip.off {                          /* value turned off (excluded) */
+  background: transparent;
+  border-color: var(--line);
+  color: var(--muted);
+  opacity: 0.75;
+}
+.chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.chip-dot.up   { background: var(--good); }
+.chip-dot.warn { background: var(--warn); }
+.chip-dot.down { background: var(--down); }
+.chip.off .chip-dot { filter: grayscale(1); opacity: 0.6; }
+/* Master "All / None" chip: full-width header toggle, label centered. */
+.chip-master {
+  width: 100%; justify-content: center;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
+  background: rgba(124, 240, 196, 0.15);
+  border-color: var(--accent-2);
+  color: var(--accent-2);
+}
+.chip-master:hover { background: rgba(124, 240, 196, 0.25); border-color: var(--accent-2); }
+.chip-master.off { background: transparent; border-color: var(--line); color: var(--muted); }
+.chip-master.partial { border-style: dashed; border-color: var(--accent-2); color: var(--accent-2); }
+
+/* A summary pill whose status is filtered out reads dimmed. */
+.sum-pill.off { opacity: 0.45; }
+
+/* Summary counts + history live in the header (Option 1). The topbar uses
+   space-between, so this cluster centers between the brand and the actions. */
+.status-cluster { display: flex; align-items: center; gap: 14px; }
+.topbar .f-reset { align-self: center; }   /* round header buttons sit centered */
+
+.history { position: relative; display: flex; align-items: center; }
+.history-btn svg { display: block; }
+.history-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 340px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: #0e1530;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  z-index: 30;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+.hist-empty { margin: 0; padding: 16px 18px; color: var(--muted); font-size: 13px; }
+.hist-list { list-style: none; margin: 0; padding: 6px; }
+.hist-row {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 8px 10px; border-radius: 8px; font-size: 12px;
+}
+.hist-row:nth-child(odd) { background: rgba(255, 255, 255, 0.03); }
+.hist-time { color: var(--muted); font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px; }
+.hist-detail { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.hist-host {
+  font-weight: 700; flex: 1; min-width: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.hist-transition { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); flex: none; white-space: nowrap; }
+.hist-transition .dot { display: inline-block; vertical-align: middle; }
+.hist-arrow { margin: 0 2px; color: var(--muted); }
+
+.summary { display: flex; align-items: center; gap: 8px; }
+.sum-pill {
+  appearance: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  color: var(--text);
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 13px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.sum-pill:hover { background: rgba(94, 123, 255, 0.15); }
+.sum-pill.active { border-color: var(--accent); background: rgba(94, 123, 255, 0.22); }
+.sum-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+}
+.sum-dot.up   { background: var(--good); color: var(--good); }
+.sum-dot.warn { background: var(--warn); color: var(--warn); }
+.sum-dot.down { background: var(--down); color: var(--down); }
+
+/* Settings (gear) menu: holds the set-once controls (Account, SSH client, IPs). */
+.settings { position: relative; display: flex; align-items: center; }
+.settings-btn svg { display: block; }
+.settings-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 230px;
+  background: #0e1530;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  z-index: 30;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.set-row {
+  display: flex; flex-direction: column; gap: 8px;
+  font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted);
+}
+.set-row input {
+  appearance: none; width: 100%;
+  background: var(--bg-1); color: var(--text);
+  border: 1px solid var(--line); border-radius: 10px;
+  padding: 8px 12px; font-size: 13px;
+  text-transform: none; letter-spacing: normal;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+.set-row input:focus { outline: none; border-color: var(--accent); }
+.set-row .f-reset { align-self: flex-start; }   /* hide-IP toggle, left-aligned in its row */
+
+.hidden { display: none !important; }
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 40px;
+  font-size: 15px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 340px));
+  gap: 26px;
+  padding: 28px 40px 60px;
+}
+
+/* ---- Card flip scaffolding ---- */
+.card {
+  perspective: 1400px;
+  height: 198px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card.flipped .card-inner { transform: rotateY(180deg); }
+
+.face {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  padding: 14px 18px;
+  backface-visibility: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.face::before {
+  /* subtle sheen */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255,255,255,0.08), transparent 40%);
+  pointer-events: none;
+}
+
+.front { background: var(--card-front); }
+.back  { background: var(--card-back); transform: rotateY(180deg); display: flex; flex-direction: column; }
+
+.card:hover .card-inner { transform: translateY(-4px); }
+.card.flipped:hover .card-inner { transform: rotateY(180deg) translateY(-4px); }
+
+/* ---- Front face (Option D: dense) ---- */
+.front { display: flex; align-items: stretch; gap: 10px; }
+.d-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+/* Keep each row at its natural height so a tall (offline) card can't squeeze
+   the text rows into each other — overflow clips at the bottom instead. */
+.d-body > * { flex-shrink: 0; }
+
+/* Status stripe (from Option A) on the LEFT edge of BOTH faces, colored by
+   live status. The back's own rotateY(180deg) cancels the flip, so left:0
+   lands on the viewer's left for the front and the flipped back alike.
+   Driven by .card[data-status] (set in app.js) so it updates without a rebuild. */
+.face::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 6px;
+  background: var(--down);
+  transition: background 0.3s ease;
+}
+.card[data-status="up"]   .face::after { background: var(--good); }
+.card[data-status="warn"] .face::after { background: var(--warn); }
+.card[data-status="down"] .face::after { background: var(--down); }
+.d-head { display: flex; align-items: center; gap: 8px; }
+.d-ip {
+  margin-top: 8px; font-size: 13px; color: var(--text);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  /* A website's URL can be long — truncate like the hostname does. */
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.d-foot { margin-top: auto; }            /* pin divider + footer to the bottom */
+/* Per-type device logo, right-aligned just above the divider (over SITE id). */
+.dev-logo {
+  display: block;
+  margin: 0 0 2px auto;
+  width: 28px; height: 28px;
+  object-fit: contain;
+}
+.front hr { border: none; border-top: 1px solid var(--line); margin: 8px 0 0; }
+.d-footrow { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+.d-controls { display: flex; align-items: center; gap: 6px; }
+.d-corner { text-align: right; font-size: 12px; color: var(--muted); }
+.d-corner .site { color: var(--accent-2); font-weight: 700; }
+/* Status light now lives in the footer, to the left of the status label. */
+.d-corner .dot { display: inline-block; vertical-align: middle; margin-right: 6px; }
+
+.pin, .hide-btn {
+  appearance: none;
+  background: transparent;
+  border: none;
+  padding: 2px;
+  line-height: 0;
+  border-radius: 6px;
+  color: var(--muted);
+  opacity: 0.6;
+  cursor: pointer;
+  transition: color 0.15s ease, opacity 0.15s ease, transform 0.15s ease;
+}
+.pin:hover, .hide-btn:hover { color: var(--text); opacity: 1; }
+.pin svg, .hide-btn svg { display: block; }
+.card.pinned .pin { color: var(--accent-2); opacity: 1; }
+.card.pinned .face { border-color: rgba(124, 240, 196, 0.45); }
+.card.buried { opacity: 0.6; }
+.card.buried .hide-btn { color: var(--text); opacity: 1; }
+.dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  box-shadow: 0 0 10px currentColor;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.dot.up   { background: var(--good); color: var(--good); }
+.dot.warn { background: var(--warn); color: var(--warn); }
+.dot.down { background: var(--down); color: var(--down); }
+
+.hostname {
+  flex: 1; min-width: 0; margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dev-type {
+  margin-top: 8px; font-size: 11px; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 1px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.downtime { margin-top: 8px; display: flex; flex-direction: column; gap: 2px; }
+.downtime .dt-activated { font-size: 11px; color: var(--muted); }
+.downtime .dt-timer {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 13px; color: var(--text);
+}
+
+/* ---- Back face ---- */
+.back h3 {
+  margin: 0 0 8px;
+  padding-right: 30px; /* leave room for the master copy button */
+  font-size: 15px;
+  color: var(--accent-2);
+  display: flex; align-items: center; gap: 8px;
+}
+.rows {
+  display: grid;
+  gap: 6px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  /* keep the scrollbar subtle and inside the rounded card */
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+  padding-right: 4px;
+}
+.row { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; }
+.row .k { color: var(--muted); }
+.row .v { font-family: ui-monospace, "SF Mono", Menlo, monospace; text-align: right; }
+.val-copy { display: inline-flex; align-items: center; gap: 7px; }
+.copy {
+  appearance: none;
+  width: 22px; height: 20px;
+  padding: 0;
+  display: inline-grid; place-items: center;
+  font-size: 12px; line-height: 1;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.copy:hover {
+  color: var(--text);
+  border-color: var(--accent);
+  background: rgba(94, 123, 255, 0.18);
+}
+.copy.copied { color: var(--good); border-color: var(--good); }
+.master-copy {
+  position: absolute;
+  top: 16px; right: 16px;
+  z-index: 2;
+}
+
+/* ---- Toast ---- */
+.toast {
+  position: fixed;
+  left: 50%; bottom: 30px;
+  transform: translate(-50%, 30px);
+  background: #0e1530;
+  border: 1px solid var(--line);
+  color: var(--text);
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 13px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---- Connection-lost banner (loud, can't-miss) ---- */
+.conn-banner {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 13px 16px;
+  text-align: center;
+  font-size: 15px; font-weight: 800; letter-spacing: 0.5px;
+  color: #fff;
+  background: #a11010;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.55);
+  animation: conn-pulse 1.1s ease-in-out infinite;
+}
+@keyframes conn-pulse {
+  0%, 100% { background: #a11010; }
+  50%      { background: #e23b3b; }
+}
+body.has-banner { padding-top: 48px; }   /* shift content below the banner */
+

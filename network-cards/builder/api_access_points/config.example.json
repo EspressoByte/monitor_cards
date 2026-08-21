@@ -1,0 +1,21 @@
+{
+  "_comment": "Copy to builder/api_access_points/config.json (gitignored) and fill in. JSON has no comments, so docs live in _comment fields and README.md.",
+
+  "controllers": [
+    {
+      "_comment": "Each Catalyst 9800 to pull APs from. An AP records the controller it was found on. List every controller in the estate; APs are keyed by serial, so an AP that roams between controllers updates one card rather than creating two.",
+      "host": "wlc-01.internal.example.com",
+      "port": 443,
+      "username": "restconf-ro",
+      "password": "CHANGEME",
+      "verify_tls": true,
+      "ca_bundle": "/path/to/internal-ca.pem"
+    }
+  ],
+
+  "site_from_hostname": "^AP-(?P<site>[0-9]+)-",
+  "_site_comment": "Regex pulling a site code out of the AP name; the named group `site` wins, else group 1. APs that don't match fall back to the AP's location as configured on the controller — pin those down in ../overrides.json.",
+
+  "timeout": 30,
+  "_timeout_comment": "Seconds per RESTCONF request."
+}

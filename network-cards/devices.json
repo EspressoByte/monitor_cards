@@ -1,0 +1,189 @@
+[
+  {
+    "hostname": "core-rtr-01",
+    "type": "Router",
+    "ip": "10.0.0.1",
+    "vendor": "Cisco",
+    "model": "ISR 4451",
+    "desc": "IOS-XE 17.9",
+    "location": "DC-A · Rack 3",
+    "site": "101",
+    "status": "down"
+  },
+  {
+    "hostname": "CA_8000_Router",
+    "type": "Router",
+    "ip": "1.1.0.225",
+    "vendor": "Cisco",
+    "model": "8000v",
+    "desc": "IOS-XE 17.9",
+    "location": "DE",
+    "site": "100",
+    "status": "down"
+  },
+  {
+    "hostname": "dist-sw-02",
+    "type": "Switch",
+    "ip": "10.0.1.2",
+    "vendor": "Arista",
+    "model": "7050SX3",
+    "desc": "EOS 4.30",
+    "location": "DC-A · Rack 5",
+    "site": "101",
+    "status": "down"
+  },
+  {
+    "hostname": "edge-fw-01",
+    "type": "Firewall",
+    "ip": "192.168.0.1",
+    "vendor": "Palo Alto",
+    "model": "PA-3220",
+    "desc": "PAN-OS 11.1",
+    "location": "DC-A · Rack 1",
+    "site": "101",
+    "status": "down"
+  },
+  {
+    "hostname": "app-srv-07",
+    "type": "Server",
+    "ip": "10.0.3.7",
+    "vendor": "Dell",
+    "model": "PowerEdge R760",
+    "desc": "Ubuntu 24.04 LTS",
+    "location": "DC-B · Rack 12",
+    "site": "205",
+    "status": "down"
+  },
+  {
+    "hostname": "wifi-ap-14",
+    "type": "Access Point",
+    "ip": "10.0.4.14",
+    "vendor": "Ubiquiti",
+    "model": "U6-Pro",
+    "desc": "UniFi 7.5",
+    "location": "Floor 2 · East",
+    "site": "312",
+    "status": "down"
+  },
+  {
+    "hostname": "CA-SanFrancisco-RT-01",
+    "type": "Router",
+    "ip": "10.50.0.1",
+    "vendor": "Cisco",
+    "model": "ISR 4451",
+    "desc": "IOS-XE 17.9",
+    "location": "San Francisco · MDF",
+    "site": "415",
+    "status": "down"
+  },
+  {
+    "hostname": "IL-Chicago-FW-01",
+    "type": "Firewall",
+    "ip": "10.176.24.19",
+    "vendor": "Palo Alto",
+    "model": "PA-3220",
+    "desc": "PAN-OS 11.1",
+    "location": "Chicago · Rack 18",
+    "site": "520",
+    "status": "down"
+  },
+  {
+    "hostname": "GA-Atlanta-RT-02",
+    "type": "Router",
+    "ip": "10.24.109.10",
+    "vendor": "Juniper",
+    "model": "MX204",
+    "desc": "Junos 22.4",
+    "location": "Atlanta · MDF",
+    "site": "415",
+    "status": "down"
+  },
+  {
+    "hostname": "TX-Austin-SRV-03",
+    "type": "Server",
+    "ip": "10.33.217.16",
+    "vendor": "Dell",
+    "model": "PowerEdge R760",
+    "desc": "Ubuntu 24.04 LTS",
+    "location": "Austin · Rack 18",
+    "site": "630",
+    "status": "down"
+  },
+  {
+    "hostname": "FL-Miami-RT-04",
+    "type": "Router",
+    "ip": "10.170.31.148",
+    "vendor": "Cisco",
+    "model": "ISR 4451",
+    "desc": "IOS-XE 17.9",
+    "location": "Miami · Rack 7",
+    "site": "415",
+    "status": "down"
+  },
+  {
+    "hostname": "CA-SanFrancisco-RT-05",
+    "type": "Router",
+    "ip": "10.152.68.75",
+    "vendor": "Cisco",
+    "model": "ISR 4451",
+    "desc": "IOS-XE 17.9",
+    "location": "SanFrancisco · Rack 3",
+    "site": "205",
+    "status": "down"
+  },
+  {
+    "hostname": "GA-Atlanta-AP-06",
+    "type": "Access Point",
+    "ip": "10.88.92.27",
+    "vendor": "Ubiquiti",
+    "model": "U6-Pro",
+    "desc": "UniFi 7.5",
+    "location": "Atlanta · Rack 7",
+    "site": "630",
+    "status": "down"
+  },
+  {
+    "hostname": "Google",
+    "type": "Website",
+    "url": "https://google.com",
+    "vendor": "HTTPS",
+    "model": "Search",
+    "desc": "Healthy site (200) — Online demo",
+    "location": "Internet",
+    "site": "WWW",
+    "status": "up"
+  },
+  {
+    "hostname": "Expired Cert Site",
+    "type": "Website",
+    "url": "https://expired.badssl.com",
+    "vendor": "HTTPS",
+    "model": "badssl.com",
+    "desc": "Expired TLS cert — Degraded demo",
+    "location": "Internet",
+    "site": "WWW",
+    "status": "warn"
+  },
+  {
+    "hostname": "API Health",
+    "type": "Website",
+    "url": "https://httpbin.org/status/503",
+    "vendor": "HTTPS",
+    "model": "httpbin.org",
+    "desc": "Returns 503 — Degraded demo",
+    "location": "Internet",
+    "site": "WWW",
+    "status": "warn"
+  },
+  {
+    "hostname": "Legacy Portal",
+    "type": "Website",
+    "url": "https://10.255.255.1",
+    "vendor": "HTTPS",
+    "model": "Intranet",
+    "desc": "Unreachable host — Offline demo",
+    "location": "Internet",
+    "site": "WWW",
+    "status": "down"
+  }
+]
